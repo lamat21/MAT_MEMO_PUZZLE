@@ -10,6 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MAT_MEMO_PUZZLE">
         <activity
+            android:name=".popInstructions"
+            android:theme= "@style/Theme.MAT_MEMO_PUZZLE.popUp"
+            android:exported="false" />
+        <activity
+            android:name=".SelectFromLevels"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
