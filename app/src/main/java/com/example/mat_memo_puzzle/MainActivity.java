@@ -10,6 +10,10 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
     private Button playButton;
     private Button instructionButton;
+    private Button nicknameButton;
+    private Button statsButton;
+    private Button settingsButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +34,30 @@ public class MainActivity extends AppCompatActivity {
 
                 openActivityPopIntrctions();
             }
+
+        });
+        nicknameButton = (Button) findViewById(R.id.nicknameButton);
+        nicknameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivityPopNickname();
+            }
+        });
+        statsButton = (Button) findViewById(R.id.statsButton);
+        statsButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                openActivityPopStats();
+            }
+
+        });
+        settingsButton = (Button) findViewById(R.id.settingsButton);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivityPopSettings();
+            }
         });
     }
 
@@ -42,4 +70,19 @@ public class MainActivity extends AppCompatActivity {
         Intent popInstructions = new Intent(this, popInstructions.class);
         startActivity(popInstructions);
     }
+
+    public void openActivityPopNickname() {
+        Intent popNickname = new Intent(this, PopNickname.class);
+        startActivity(popNickname);
+    }
+
+    public void openActivityPopStats() {
+        Intent popStats = new Intent(this, PopStats.class);
+        startActivity(popStats);
+    }
+    public void openActivityPopSettings() {
+        Intent popSettings = new Intent(this, PopSettings.class);
+        startActivity(popSettings);
+    }
+
 }
