@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName5"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName2"
-        tools:layout_editor_absoluteY="103dp" />
+        tools:layout_editor_absoluteY="103dp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editTextTextPersonName5"
@@ -28,7 +29,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName4"
-        tools:layout_editor_absoluteY="103dp" />
+        tools:layout_editor_absoluteY="103dp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editTextTextPersonName3"
@@ -52,7 +54,8 @@
         app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName4"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
-        tools:layout_editor_absoluteY="103dp" />
+        tools:layout_editor_absoluteY="103dp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
@@ -64,7 +67,8 @@
         app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName3"
-        tools:layout_editor_absoluteY="103dp" />
+        tools:layout_editor_absoluteY="103dp"
+        tools:ignore="MissingConstraints" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group"
@@ -80,5 +84,6 @@
         app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="103dp" />
+        tools:layout_editor_absoluteY="103dp"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
