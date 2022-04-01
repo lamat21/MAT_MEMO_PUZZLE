@@ -3,16 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Acer/AndroidStudioProjects/MAT_MEMO_PUZZLE/app/src/main/res/layout/activity_easy_level.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Acer/AndroidStudioProjects/MAT_MEMO_PUZZLE/app/src/main/res/layout/activity_select_from_levels.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_choose_level.xml" value="0.14673913043478262" />
-        <entry key="app/src/main/res/layout/activity_easy_level.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_hard_level.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_medium_level.xml" value="0.1160081053698075" />
         <entry key="app/src/main/res/layout/activity_pop_instructions.xml" value="0.12462006079027356" />
-        <entry key="app/src/main/res/layout/activity_pop_nickname.xml" value="0.16394927536231885" />
-        <entry key="app/src/main/res/layout/activity_pop_settings.xml" value="0.12462006079027356" />
-        <entry key="app/src/main/res/layout/activity_pop_stats.xml" value="0.13177083333333334" />
-        <entry key="app/src/main/res/layout/activity_select_from_levels.xml" value="0.24535315985130113" />
+        <entry key="app/src/main/res/layout/activity_select_from_levels.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_select_level.xml" value="0.20108695652173914" />
         <entry key="app/src/main/res/layout/select_level.xml" value="0.20108695652173914" />
       </map>
