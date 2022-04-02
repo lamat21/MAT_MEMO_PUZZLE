@@ -1,5 +1,6 @@
 package com.example.mat_memo_puzzle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.VideoView;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,20 +23,25 @@ public class MainActivity extends AppCompatActivity {
     private int CurrentVideoPosition;
     private Stats userStats = new Stats();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         videoview = findViewById(R.id.videoview);
-        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" +R.raw.backgroundvid);
+        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.backgroundvid);
         videoview.setVideoURI(uri);
         videoview.start();
 
         //Set States
-        Stats userStatsChangedName = getIntent().getParcelableExtra("userStatsChangeName");
-        userStats = new Stats(userStatsChangedName);
-
+        /*if (!(userStats.getNickname().equals("Ali"))) {
+            Intent recieveName = getIntent();
+            String newName = recieveName.getStringExtra("ChangeName");
+            userStats.resetNickName(newName);
+        }*/
+        userStats.resetNickName("newName");
         videoview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
@@ -61,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
         instructionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 openActivityPopIntrctions();
             }
 
@@ -138,6 +144,5 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         mMediaPlayer = null;
     }
-
 
 }
