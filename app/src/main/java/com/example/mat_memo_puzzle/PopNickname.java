@@ -45,7 +45,7 @@ public class PopNickname extends AppCompatActivity {
         submitNickname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String newName = ("" + nameInput.getText());
+                String newName = ("" + nameInput.getText().toString());
                 openActivitySubmitNickname(newName);
             }
 
@@ -56,6 +56,7 @@ public class PopNickname extends AppCompatActivity {
         Intent submitNickname = new Intent(this, MainActivity.class);
         submitNickname.putExtra("ChangeName", newName);
         startActivity(submitNickname);
+        finish();
     }
 
 }

@@ -36,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
         videoview.start();
 
         //Set States
-        /*if (!(userStats.getNickname().equals("Ali"))) {
+        if (!(userStats.getNickname().equals("Ali"))) {
             Intent recieveName = getIntent();
             String newName = recieveName.getStringExtra("ChangeName");
             userStats.resetNickName(newName);
-        }*/
+        }
         userStats.resetNickName("newName");
         videoview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override

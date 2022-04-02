@@ -58,11 +58,7 @@ public class EasyLevel extends AppCompatActivity {
 
                 //Check answer and give feedback
                 openActivitySubmitBtn(userAnswer);
-                if (game.checkAnswer(userAnswer)){
-                    game.resetGameBoard(1);
-                } else {
-                    doWeKeepPlaying = false;
-                }
+
             }
             //openActivitySubmitBtn();
         } catch (InterruptedException e) {
