@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private VideoView videoview;
     private MediaPlayer mMediaPlayer;
     private int CurrentVideoPosition;
-    public Stats userInfo = new Stats();
+    public Stats userStats = new Stats();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 openActivityPopNickname();
             }
         });
+
         statsButton = (Button) findViewById(R.id.statsButton);
         statsButton.setOnClickListener(new View.OnClickListener(){
 
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
         settingsButton = (Button) findViewById(R.id.settingsButton);
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void openActivityPopStats() {
         Intent popStats = new Intent(this, PopStats.class);
+        popStats.putExtra("userStats", userStats);
         startActivity(popStats);
     }
     public void openActivityPopSettings() {
