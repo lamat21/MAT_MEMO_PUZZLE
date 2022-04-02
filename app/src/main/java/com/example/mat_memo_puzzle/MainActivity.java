@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
         videoview.start();
 
         //Set States
-        userStats = new Stats(getIntent().getParcelableExtra("userStats"));
+        userStats = new Stats(getIntent().getParcelableExtra("userStatsChangeName"));
+
 
         videoview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
@@ -137,4 +138,6 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         mMediaPlayer = null;
     }
+
+
 }

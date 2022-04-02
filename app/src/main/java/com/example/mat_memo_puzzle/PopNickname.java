@@ -50,7 +50,7 @@ public class PopNickname extends AppCompatActivity {
     }
     public void openActivitySubmitNickname(Stats userStats) {
         Intent submitNickname = new Intent(this, MainActivity.class);
-        submitNickname.putExtra("userStats", userStats);
+        submitNickname.putExtra("userStatsChangeName", userStats);
         startActivity(submitNickname);
     }
 
