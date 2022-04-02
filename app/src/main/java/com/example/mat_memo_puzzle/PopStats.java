@@ -40,9 +40,9 @@ public class PopStats extends AppCompatActivity {
 
         Stats userStats = getIntent().getParcelableExtra("userStats");
         nickName.setText(userStats.getNickname());
-        latestScore.setText(userStats.getLatestScore());
-        highScore.setText(userStats.getHighScore());
-        numOfGame.setText(userStats.getNumOfGames());
+        latestScore.setText("  " + userStats.getLatestScore());
+        highScore.setText("  " +userStats.getHighScore());
+        numOfGame.setText("  " + (userStats.getNumOfGames()));
 
     }
 }

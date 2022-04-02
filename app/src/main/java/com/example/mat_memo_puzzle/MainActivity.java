@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private VideoView videoview;
     private MediaPlayer mMediaPlayer;
     private int CurrentVideoPosition;
-    public Stats userStats = new Stats();
+    private Stats userStats = new Stats();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
