@@ -1,8 +1,11 @@
 package com.example.mat_memo_puzzle;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.*;
 import java.util.ArrayList;
 
-public class GameBoard implements parcelable{
+public class GameBoard implements Parcelable {
     private ArrayList<Integer> numberList;
     private int score;
 
@@ -27,6 +30,22 @@ public class GameBoard implements parcelable{
         this.score = 0;
 
     }
+
+    protected GameBoard(Parcel in) {
+        score = in.readInt();
+    }
+
+    public static final Creator<GameBoard> CREATOR = new Creator<GameBoard>() {
+        @Override
+        public GameBoard createFromParcel(Parcel in) {
+            return new GameBoard(in);
+        }
+
+        @Override
+        public GameBoard[] newArray(int size) {
+            return new GameBoard[size];
+        }
+    };
 
     public ArrayList<Integer> getNumberList (){
         return numberList;
@@ -67,5 +86,15 @@ public class GameBoard implements parcelable{
         numberList.add(x);
         this.score++;
 
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(score);
     }
 }

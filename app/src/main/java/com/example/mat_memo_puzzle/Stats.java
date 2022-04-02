@@ -1,7 +1,10 @@
 package com.example.mat_memo_puzzle;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.*;
 
-public class Stats {
+public class Stats implements Parcelable {
     private String nickname;
     private int highScore;
     private int numOfGames;
@@ -13,6 +16,25 @@ public class Stats {
         numOfGames = 0;
         latestScore = 0;
     }
+
+    protected Stats(Parcel in) {
+        nickname = in.readString();
+        highScore = in.readInt();
+        numOfGames = in.readInt();
+        latestScore = in.readInt();
+    }
+
+    public static final Creator<Stats> CREATOR = new Creator<Stats>() {
+        @Override
+        public Stats createFromParcel(Parcel in) {
+            return new Stats(in);
+        }
+
+        @Override
+        public Stats[] newArray(int size) {
+            return new Stats[size];
+        }
+    };
 
     public String getNickname(){
         return nickname;
@@ -51,5 +73,18 @@ public class Stats {
                 ", highScore " + this.highScore +
                 ", numOfGames " + this.numOfGames +
                 ", latestScore " + this.latestScore;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(nickname);
+        parcel.writeInt(highScore);
+        parcel.writeInt(numOfGames);
+        parcel.writeInt(latestScore);
     }
 }
