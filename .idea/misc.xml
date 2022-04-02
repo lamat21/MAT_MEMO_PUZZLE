@@ -8,7 +8,8 @@
         <entry key="app/src/main/res/layout/activity_easy_level.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_hard_level.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_medium_level.xml" value="0.1160081053698075" />
+        <entry key="app/src/main/res/layout/activity_medium_level.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_menu_btn.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_pop_instructions.xml" value="0.12462006079027356" />
         <entry key="app/src/main/res/layout/activity_pop_nickname.xml" value="0.16394927536231885" />
         <entry key="app/src/main/res/layout/activity_pop_settings.xml" value="0.12462006079027356" />
