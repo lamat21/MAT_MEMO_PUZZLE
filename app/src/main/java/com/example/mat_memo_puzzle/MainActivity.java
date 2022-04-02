@@ -31,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
         videoview.setVideoURI(uri);
         videoview.start();
 
+        //Set States
+        userStats = new Stats(getIntent().getParcelableExtra("userStats"));
+
         videoview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
@@ -101,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void openActivityPopNickname() {
         Intent popNickname = new Intent(this, PopNickname.class);
+        popNickname.putExtra("userStats", userStats);
         startActivity(popNickname);
     }
 

@@ -9,14 +9,17 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class PopNickname extends AppCompatActivity {
     private Button submitNickname;
+    private EditText nameInput;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_nickname);
 
+        //popUP Settings
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width =  dm. widthPixels;
@@ -31,18 +34,23 @@ public class PopNickname extends AppCompatActivity {
 
         getWindow().setAttributes(params);
 
-        submitNickname = (Button) findViewById(R.id.submitNickname);
+        //Set Settings
+        nameInput = findViewById(R.id.nameInput);
+        Stats userStats = getIntent().getParcelableExtra("userStats");
+
+        submitNickname = (Button) findViewById(R.id.submitNicknameBtn);
         submitNickname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                openActivitySubmitNickname();
+                userStats.resetNickName("" + nameInput.getText());
+                openActivitySubmitNickname(userStats);
             }
 
         });
     }
-    public void openActivitySubmitNickname() {
+    public void openActivitySubmitNickname(Stats userStats) {
         Intent submitNickname = new Intent(this, MainActivity.class);
+        submitNickname.putExtra("userStats", userStats);
         startActivity(submitNickname);
     }
 
