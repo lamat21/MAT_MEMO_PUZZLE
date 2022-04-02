@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+
 public class HardLevel extends AppCompatActivity {
     private Button pauseBtn;
     private Button submitBtn;

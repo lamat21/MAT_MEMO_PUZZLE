@@ -3,9 +3,12 @@ package com.example.mat_memo_puzzle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.VideoView;
 
 public class MainActivity extends AppCompatActivity {
     private Button playButton;
@@ -13,11 +16,32 @@ public class MainActivity extends AppCompatActivity {
     private Button nicknameButton;
     private Button statsButton;
     private Button settingsButton;
-
+    private VideoView videoview;
+    private MediaPlayer mMediaPlayer;
+    private int CurrentVideoPosition;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        videoview = findViewById(R.id.videoview);
+        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" +R.raw.backgroundvid);
+        videoview.setVideoURI(uri);
+        videoview.start();
+
+        videoview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                mMediaPlayer = mediaPlayer;
+                mediaPlayer.setLooping(true);
+
+                if (CurrentVideoPosition !=0){
+                    mMediaPlayer.seekTo(CurrentVideoPosition);
+                    mMediaPlayer.start();
+                }
+            }
+        });
+
 
         playButton = (Button) findViewById(R.id.playButton);
         playButton.setOnClickListener(new View.OnClickListener() {
@@ -85,4 +109,23 @@ public class MainActivity extends AppCompatActivity {
         startActivity(popSettings);
     }
 
+    @Override
+    protected void onResume() {
+        videoview.start();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        videoview.pause();
+        CurrentVideoPosition = mMediaPlayer.getCurrentPosition();
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        mMediaPlayer.release();
+        super.onDestroy();
+        mMediaPlayer = null;
+    }
 }
