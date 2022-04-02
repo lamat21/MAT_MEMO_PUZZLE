@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private VideoView videoview;
     private MediaPlayer mMediaPlayer;
     private int CurrentVideoPosition;
+    public Stats userInfo = new Stats();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

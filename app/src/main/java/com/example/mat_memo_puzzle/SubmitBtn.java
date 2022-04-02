@@ -18,6 +18,8 @@ public class SubmitBtn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_btn);
 
+
+
         playAgain = (Button) findViewById(R.id.playAgain);
         playAgain.setOnClickListener(new View.OnClickListener() {
             @Override

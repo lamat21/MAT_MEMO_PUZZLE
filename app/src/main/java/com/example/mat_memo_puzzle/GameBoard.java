@@ -2,7 +2,7 @@ package com.example.mat_memo_puzzle;
 import java.util.*;
 import java.util.ArrayList;
 
-public class GameBoard {
+public class GameBoard implements parcelable{
     private ArrayList<Integer> numberList;
     private int score;
 
