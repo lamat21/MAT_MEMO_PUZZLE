@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         videoview.start();
 
         //Set States
-        userStats = new Stats(getIntent().getParcelableExtra("userStatsChangeName"));
-
+        Stats userStatsChangedName = getIntent().getParcelableExtra("userStatsChangeName");
+        userStats = new Stats(userStatsChangedName);
 
         videoview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override

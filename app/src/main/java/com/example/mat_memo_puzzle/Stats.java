@@ -17,6 +17,13 @@ public class Stats implements Parcelable {
         latestScore = 0;
     }
 
+    public Stats(Stats other){
+        nickname = other.getNickname();
+        highScore = other.getHighScore();
+        numOfGames = other.getNumOfGames();
+        latestScore = other.getLatestScore();
+    }
+
     protected Stats(Parcel in) {
         nickname = in.readString();
         highScore = in.readInt();
