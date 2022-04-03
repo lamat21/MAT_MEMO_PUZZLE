@@ -13,11 +13,7 @@ import android.widget.EditText;
 import android.widget.VideoView;
 
 public class MainActivity extends AppCompatActivity {
-    private Button playButton;
-    private Button instructionButton;
-    private Button nicknameButton;
-    private Button statsButton;
-    private Button settingsButton;
+    private Button playButton, instructionButton, nicknameButton, statsButton, settingsButton;
     private VideoView videoview;
     private MediaPlayer mMediaPlayer;
     private int CurrentVideoPosition;
@@ -100,8 +96,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openActivitySelectLevels(){
-        Intent intent = new Intent(this, SelectFromLevels.class);
-        startActivity(intent);
+        Intent selectLevels = new Intent(this, SelectFromLevels.class);
+        selectLevels.putExtra("userStats", userStats);
+        startActivity(selectLevels);
     }
 
     public void openActivityPopIntrctions() {

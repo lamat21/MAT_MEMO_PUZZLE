@@ -68,8 +68,9 @@
                 android:layout_width="71dp"
                 android:layout_height="38dp"
                 android:ems="10"
+                android:inputType="number"
                 android:text=""
-                android:inputType="number"/>
+                android:textColor="@color/black" />
 
 
         </TableRow>

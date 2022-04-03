@@ -8,14 +8,16 @@ import android.view.View;
 import android.widget.Button;
 
 public class SelectFromLevels extends AppCompatActivity {
-    private Button easyButton;
-    private Button mediumButton;
-    private Button hardButton;
+    private Button easyButton, mediumButton, hardButton;
+    private Stats userStats = new Stats();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_from_levels);
+
+        //Set Stats
+        userStats = getIntent().getParcelableExtra("userStats");
 
         easyButton = (Button) findViewById(R.id.easyButton);
         easyButton.setOnClickListener(new View.OnClickListener() {
@@ -38,19 +40,22 @@ public class SelectFromLevels extends AppCompatActivity {
                 openActivityhardLevel();
             }
         });
-        }
+    }
 
     public void openActivityeasyLevel() {
         Intent easyButton = new Intent(this, EasyLevel.class);
+        easyButton.putExtra("userStats", userStats);
         startActivity(easyButton);
     }
 
    public void openActivitymediumLevel() {
         Intent mediumButton = new Intent(this, MediumLevel.class);
+       mediumButton.putExtra("userStats", userStats);
         startActivity(mediumButton);
     }
     public void openActivityhardLevel() {
         Intent hardButton = new Intent(this, HardLevel.class);
+        hardButton.putExtra("userStats", userStats);
         startActivity(hardButton);
     }
 }
