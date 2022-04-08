@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class EasyLevel extends AppCompatActivity {
     private Button pauseBtn;
@@ -16,6 +17,8 @@ public class EasyLevel extends AppCompatActivity {
     private TextView DisplayList;
     private TextView DisplayInstructions;
     private EditText userInput;
+    private ArrayList<Integer> numberList = new ArrayList<Integer>();
+    ArrayList<Integer> scrambledNumberList = new ArrayList<Integer>();
     GameBoard game;
 
     @Override
@@ -27,30 +30,45 @@ public class EasyLevel extends AppCompatActivity {
         DisplayInstructions = findViewById(R.id.DisplayInstructions);
 
         boolean doWeKeepPlaying = true;
-        game = new GameBoard(1);
+        //game = new GameBoard(1);
+        //Set gameboard
+        addToList(3);
+
+
         try {
             while (doWeKeepPlaying){
                 //Wait so user can read the starting massage
                 Thread.sleep(1000);
 
-                for (Integer i: game.getNumberList()) {
-                    DisplayList.setText(i);
+                for (int i = 0; i < numberList.size(); i++) {
+                    DisplayList.setText(numberList.get(i));
                     Thread.sleep(1250);
                     DisplayList.setText("");
                     Thread.sleep(1250);
                 }
+    //                for (Integer i: game.getNumberList()) {
+    //                    DisplayList.setText(i);
+    //                    Thread.sleep(1250);
+    //                    DisplayList.setText("");
+    //                    Thread.sleep(1250);
+    //                }
 
                 //Displays the list of numbers in a scrambled order
+                scramble ();
                 DisplayInstructions.setText("Let's test your memory!");
-                ArrayList<Integer> scrambledList = game.scramble();
+                //ArrayList<Integer> scrambledList = game.scramble();
                 String scrambledListOfNum = "";
-                for (Integer i: scrambledList) {
-                    scrambledListOfNum += i;
+                for (int i = 0; i < scrambledNumberList.size(); i++) {
+                    scrambledListOfNum += scrambledNumberList.get(i);
                     scrambledListOfNum += "   ";
                 }
+//                for (Integer i: scrambledList) {
+//                    scrambledListOfNum += i;
+//                    scrambledListOfNum += "   ";
+//                }
                 DisplayList.setText(scrambledListOfNum);
 
-                //Get users answer
+                /*//Get users answer
                 Thread.sleep(1000);
                 submitBtn = (Button) findViewById(R.id.submitBtn);
                 ArrayList<Integer> userAnswer = new ArrayList<Integer>();
@@ -58,7 +76,7 @@ public class EasyLevel extends AppCompatActivity {
 
                 //Check answer and give feedback
                 openActivitySubmitBtn(userAnswer);
-
+*/
             }
             //openActivitySubmitBtn();
         } catch (InterruptedException e) {
@@ -74,6 +92,7 @@ public class EasyLevel extends AppCompatActivity {
             }
         });
     }
+
 
         private ArrayList<Integer> enterInput(ArrayList<Integer> userAnswer) {
             for (int i = 0; i < game.getNumberList().size(); i++) {
@@ -102,5 +121,29 @@ public class EasyLevel extends AppCompatActivity {
                 startActivity(submitBtn);
             }
         }
+
+        public void addToList(){
+            int maximum = 5;
+            int minimum = 1;
+            int x = (int)(Math.random() * maximum) + minimum;
+            numberList.add(x);
+            scrambledNumberList.add(x);
+        }
+
+        public void addToList(int num){
+            for (int i = 0; i < num; i++) {
+                int maximum = 5;
+                int minimum = 1;
+                int x = (int)(Math.random() * maximum) + minimum;
+                numberList.add(x);
+                scrambledNumberList.add(x);
+            }
+        }
+
+        public void scramble (){
+            Collections.shuffle(scrambledNumberList);
+        }
+
+
 
     }
