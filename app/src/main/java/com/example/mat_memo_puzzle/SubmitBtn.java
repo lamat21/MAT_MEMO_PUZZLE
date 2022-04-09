@@ -12,29 +12,34 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class SubmitBtn extends AppCompatActivity {
-    TextView nickName, latestScore, highScore, numOfGame;
+    private TextView nickName;
+    private TextView latestScore;
+    private TextView highScore;
+    private TextView numOfGame;
     private Button playAgain = (Button) findViewById(R.id.playAgain);
     private Button homeButton = (Button) findViewById(R.id.homeButton);
-    private Stats userStats = new Stats();
+    //private Stats userStats = new Stats();
+    private int score = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_btn);
 
         //Set Stats
-        userStats = getIntent().getParcelableExtra("userStats");
+        //score = getIntent().getIntExtra("userScore", 0);
 
         playAgain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                openActivitySelectLevels();
+               // openActivitySelectLevels();
             }
         });
 
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 openActivitymainActivity();
             }
 
@@ -46,11 +51,13 @@ public class SubmitBtn extends AppCompatActivity {
         highScore = findViewById(R.id.highScore);
         numOfGame = findViewById(R.id.gamesPlayed);
 
-        Stats userStats = getIntent().getParcelableExtra("userStats");
+      /*  Stats userStats = getIntent().getParcelableExtra("userStats");
         nickName.setText(userStats.getNickname());
         latestScore.setText("  " + userStats.getLatestScore());
         highScore.setText("  " + userStats.getHighScore());
-        numOfGame.setText("  " + (userStats.getNumOfGames()));
+        numOfGame.setText("  " + (userStats.getNumOfGames()));*/
+
+        latestScore.setText("  " + score);
     }
 
     public void openActivitySelectLevels() {
@@ -59,7 +66,7 @@ public class SubmitBtn extends AppCompatActivity {
     }
     public void openActivitymainActivity() {
         Intent homeButton = new Intent(this, MainActivity.class);
-        homeButton.putExtra("StatsUpdate", userStats);
+       // homeButton.putExtra("StatsUpdate", score);
         startActivity(homeButton);
     }
 }

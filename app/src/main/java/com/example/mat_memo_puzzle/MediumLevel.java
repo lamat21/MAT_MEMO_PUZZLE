@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MediumLevel extends AppCompatActivity {
     private Button pauseBtn = findViewById(R.id.pauseBtn);

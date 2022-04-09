@@ -28,4 +28,6 @@ public class PopSettings extends AppCompatActivity {
 
         getWindow().setAttributes(params);
     }
+
+
 }

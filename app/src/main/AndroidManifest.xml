@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MAT_MEMO_PUZZLE">
         <activity
+            android:name=".endGame"
+            android:exported="false" />
+        <activity
             android:name=".SubmitBtn"
             android:exported="false" />
         <activity
