@@ -10,8 +10,10 @@ import android.widget.TextView;
 
 public class SelectFromLevels extends AppCompatActivity {
     private Button easyButton, mediumButton, hardButton;
-    private Stats userStats = new Stats();
-
+    private int latestScore = 0;
+    private int highScore = 0;
+    private int numGamesPlayed  =0;
+    private String name = "Dema";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +21,10 @@ public class SelectFromLevels extends AppCompatActivity {
 
 
         //Set Stats
-        userStats = getIntent().getParcelableExtra("userStats");
+        name = getIntent().getStringExtra("name");
+        latestScore = getIntent().getIntExtra("latestScore", latestScore);
+        highScore = getIntent().getIntExtra("highScore", highScore);
+        numGamesPlayed = getIntent().getIntExtra("numGamesPlayed", numGamesPlayed);
 
         easyButton = (Button) findViewById(R.id.easyButton);
         easyButton.setOnClickListener(new View.OnClickListener() {
@@ -46,18 +51,27 @@ public class SelectFromLevels extends AppCompatActivity {
 
     public void openActivityeasyLevel() {
         Intent easyButton = new Intent(this, EasyLevel.class);
-        easyButton.putExtra("userStats", userStats);
+        easyButton.putExtra("latestScore", latestScore);
+        easyButton.putExtra("highScore", highScore);
+        easyButton.putExtra("numGamesPlayed", numGamesPlayed);
+        easyButton.putExtra("name", name);
         startActivity(easyButton);
     }
 
    public void openActivitymediumLevel() {
         Intent mediumButton = new Intent(this, MediumLevel.class);
-       mediumButton.putExtra("userStats", userStats);
+        mediumButton.putExtra("latestScore", latestScore);
+        mediumButton.putExtra("highScore", highScore);
+        mediumButton.putExtra("numGamesPlayed", numGamesPlayed);
+        mediumButton.putExtra("name", name);
         startActivity(mediumButton);
     }
     public void openActivityhardLevel() {
         Intent hardButton = new Intent(this, HardLevel.class);
-        hardButton.putExtra("userStats", userStats);
+        hardButton.putExtra("latestScore", latestScore);
+        hardButton.putExtra("highScore", highScore);
+        hardButton.putExtra("numGamesPlayed", numGamesPlayed);
+        hardButton.putExtra("name", name);
         startActivity(hardButton);
     }
 }

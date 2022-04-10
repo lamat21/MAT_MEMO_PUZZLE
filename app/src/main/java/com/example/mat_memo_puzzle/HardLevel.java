@@ -23,10 +23,19 @@ public class HardLevel extends AppCompatActivity {
     private int count = 0;
     private ArrayList<Integer> userAns = new ArrayList<Integer>();
     private int score = 0 ;
+    private int latestScore = 0;
+    private int highScore = 0;
+    private int numGamesPlayed  =0;
+    private String name = "Dema";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hard_level);
+
+        name = getIntent().getStringExtra("name");
+        latestScore = getIntent().getIntExtra("latestScore", latestScore);
+        highScore = getIntent().getIntExtra("highScore", highScore);
+        numGamesPlayed = getIntent().getIntExtra("numGamesPlayed", numGamesPlayed);
 
         addToList(5);
         DisplayInstructions = (TextView)findViewById(R.id.displayInstructions);
@@ -79,6 +88,10 @@ public class HardLevel extends AppCompatActivity {
                         score++;
                     }
                     else{
+                        latestScore = score;
+                        if (latestScore > highScore){
+                            highScore = latestScore;
+                        }
                         openActivitySubmitBtn();
                     }
                 }
@@ -88,13 +101,24 @@ public class HardLevel extends AppCompatActivity {
         });
     }
     public void openActivityPauseBtn() {
+        latestScore = score;
+        if (latestScore > highScore){
+            highScore = latestScore;
+        }
         Intent pausebtn = new Intent(this, MenuBtn.class);
+        pausebtn.putExtra("latestScore", latestScore);
+        pausebtn.putExtra("highScore", highScore);
+        pausebtn.putExtra("numGamesPlayed", numGamesPlayed);
+        pausebtn.putExtra("name", name);
         startActivity(pausebtn);
     }
     public void openActivitySubmitBtn() {
 
         Intent submitBtn = new Intent(this, endGame.class);
-        submitBtn.putExtra("userScore", score);
+        submitBtn.putExtra("latestScore", latestScore);
+        submitBtn.putExtra("highScore", highScore);
+        submitBtn.putExtra("numGamesPlayed", numGamesPlayed);
+        submitBtn.putExtra("name", name);
         startActivity(submitBtn);
     }
 

@@ -11,10 +11,21 @@ public class MenuBtn extends AppCompatActivity {
     private Button settingsButton;
     private Button instructionButton;
     private Button quitGame;
+
+    private int latestScore2 = 0;
+    private int highScore = 0;
+    private int numGamesPlayed  =0;
+    private String name = "Dema";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_btn);
+
+        name = getIntent().getStringExtra("name");
+        latestScore2 = getIntent().getIntExtra("latestScore", latestScore2);
+        highScore = getIntent().getIntExtra("highScore", highScore);
+        numGamesPlayed = getIntent().getIntExtra("numGamesPlayed", numGamesPlayed);
+        numGamesPlayed++;
 
         settingsButton = (Button) findViewById(R.id.settingsButton);
         settingsButton.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +64,10 @@ public class MenuBtn extends AppCompatActivity {
     }
     public void openActivitymainActivity() {
         Intent homeButton = new Intent(this, MainActivity.class);
+        homeButton.putExtra("latestScore", latestScore2);
+        homeButton.putExtra("highScore", highScore);
+        homeButton.putExtra("numGamesPlayed", numGamesPlayed);
+        homeButton.putExtra("name", name);
         startActivity(homeButton);
     }
 }

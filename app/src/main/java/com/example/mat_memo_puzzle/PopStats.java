@@ -10,7 +10,11 @@ import android.widget.TextView;
 
 public class PopStats extends AppCompatActivity {
 
-    TextView nickName, latestScore, highScore, numOfGame;
+    private TextView nickName , latestScore, highScore, numOfGame;
+    private int latestScore2 = 0;
+    private int highScore2 = 0;
+    private int numGamesPlayed  =0;
+    private String name = "Dema";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +42,17 @@ public class PopStats extends AppCompatActivity {
         highScore = findViewById(R.id.highestScore);
         numOfGame = findViewById(R.id.numberOfGames);
 
-        Stats userStats = getIntent().getParcelableExtra("userStats");
-        nickName.setText(userStats.getNickname());
-        latestScore.setText("  " + userStats.getLatestScore());
-        highScore.setText("  " + userStats.getHighScore());
-        numOfGame.setText("  " + (userStats.getNumOfGames()));
+
+        name = getIntent().getStringExtra("name");
+        latestScore2 = getIntent().getIntExtra("latestScore", 0);
+        highScore2 = getIntent().getIntExtra("highScore", 0);
+        numGamesPlayed = getIntent().getIntExtra("numGamesPlayed", 0);
+
+
+        nickName.setText(name);
+        latestScore.setText("  " + latestScore2);
+        highScore.setText("  " + highScore2);
+        numOfGame.setText("  " + numGamesPlayed);
 
     }
 }

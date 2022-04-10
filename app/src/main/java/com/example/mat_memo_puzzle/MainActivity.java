@@ -17,8 +17,10 @@ public class MainActivity extends AppCompatActivity {
     private VideoView videoview;
     private MediaPlayer mMediaPlayer;
     private int CurrentVideoPosition;
-    private Stats userStats = new Stats();
-
+    private int latestScore = 0;
+    private int highScore = 0;
+    private int numGamesPlayed  =0;
+    private String name = "Dema";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +33,14 @@ public class MainActivity extends AppCompatActivity {
         videoview.setVideoURI(uri);
         videoview.start();
 
-        //Set States
-        if (!(userStats.getNickname().equals("Ali"))) {
-            Intent recieveName = getIntent();
-            String newName = recieveName.getStringExtra("ChangeName");
-            userStats.resetNickName(newName);
-        }
-        userStats.resetNickName("newName");
+
+        name = getIntent().getStringExtra("ChangeName");
+        name = getIntent().getStringExtra("name");
+        latestScore = getIntent().getIntExtra("latestScore", latestScore);
+        highScore = getIntent().getIntExtra("highScore", highScore);
+        numGamesPlayed = getIntent().getIntExtra("numGamesPlayed", numGamesPlayed);
+
+
         videoview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
@@ -97,7 +100,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void openActivitySelectLevels(){
         Intent selectLevels = new Intent(this, SelectFromLevels.class);
-        selectLevels.putExtra("userStats", userStats);
+        selectLevels.putExtra("latestScore", latestScore);
+        selectLevels.putExtra("highScore", highScore);
+        selectLevels.putExtra("numGamesPlayed", numGamesPlayed);
+        selectLevels.putExtra("name", name);
         startActivity(selectLevels);
     }
 
@@ -108,13 +114,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void openActivityPopNickname() {
         Intent popNickname = new Intent(this, PopNickname.class);
-        popNickname.putExtra("userStats", userStats);
+
         startActivity(popNickname);
     }
 
     public void openActivityPopStats() {
         Intent popStats = new Intent(this, PopStats.class);
-        popStats.putExtra("userStats", userStats);
+        popStats.putExtra("latestScore", latestScore);
+        popStats.putExtra("highScore", highScore);
+        popStats.putExtra("numGamesPlayed", numGamesPlayed);
+        popStats.putExtra("name", name);
         startActivity(popStats);
     }
     public void openActivityPopSettings() {

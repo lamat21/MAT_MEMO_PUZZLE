@@ -19,7 +19,7 @@ public class popInstructions extends AppCompatActivity {
         int width =  dm. widthPixels;
         int height =  dm.heightPixels;
 
-        getWindow(). setLayout ((int) (width*.8) , (int) (height*.6));
+        getWindow(). setLayout ((int) (width*.9) , (int) (height*.6));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;

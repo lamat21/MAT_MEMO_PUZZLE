@@ -18,71 +18,45 @@ public class EasyLevel extends AppCompatActivity {
     private TextView DisplayInstructions;
     private EditText userInput;
     private ArrayList<Integer> numberList = new ArrayList<Integer>();
-    ArrayList<Integer> scrambledNumberList = new ArrayList<Integer>();
-    GameBoard game;
-
+    private int count = 0;
+    private ArrayList<Integer> userAns = new ArrayList<Integer>();
+    private int score = 0 ;
+    private int latestScore = 0;
+    private int highScore = 0;
+    private int numGamesPlayed  =0;
+    private String name = "Dema";
     @Override
-    protected void onCreate(Bundle savedInstanceState)  {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_easy_level);
+        setContentView(R.layout.activity_hard_level);
 
-        DisplayList = findViewById(R.id.DisplayList);
-        DisplayInstructions = findViewById(R.id.DisplayInstructions);
-
-        boolean doWeKeepPlaying = true;
-        //game = new GameBoard(1);
-        //Set gameboard
-        addToList(3);
+        name = getIntent().getStringExtra("name");
+        latestScore = getIntent().getIntExtra("latestScore", latestScore);
+        highScore = getIntent().getIntExtra("highScore", highScore);
+        numGamesPlayed = getIntent().getIntExtra("numGamesPlayed", numGamesPlayed);
 
 
-        try {
-            while (doWeKeepPlaying){
-                //Wait so user can read the starting massage
-                Thread.sleep(1000);
+        addToList(5);
+        DisplayInstructions = (TextView)findViewById(R.id.displayInstructions);
 
-                for (int i = 0; i < numberList.size(); i++) {
-                    DisplayList.setText(numberList.get(i));
-                    Thread.sleep(1250);
-                    DisplayList.setText("");
-                    Thread.sleep(1250);
+        userInput = (EditText) findViewById(R.id.userInput);
+        //int count = 0;
+        DisplayList = (TextView)findViewById(R.id.displayList);
+        DisplayList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (count < numberList.size()){
+                    DisplayList(numberList.get(count));
+                    count++;
                 }
-    //                for (Integer i: game.getNumberList()) {
-    //                    DisplayList.setText(i);
-    //                    Thread.sleep(1250);
-    //                    DisplayList.setText("");
-    //                    Thread.sleep(1250);
-    //                }
-
-                //Displays the list of numbers in a scrambled order
-                scramble ();
-                DisplayInstructions.setText("Let's test your memory!");
-                //ArrayList<Integer> scrambledList = game.scramble();
-                String scrambledListOfNum = "";
-                for (int i = 0; i < scrambledNumberList.size(); i++) {
-                    scrambledListOfNum += scrambledNumberList.get(i);
-                    scrambledListOfNum += "   ";
+                else {
+                    DisplayList.setText("Enter the numbers in order");
+                    count = 0;
                 }
-//                for (Integer i: scrambledList) {
-//                    scrambledListOfNum += i;
-//                    scrambledListOfNum += "   ";
-//                }
-                DisplayList.setText(scrambledListOfNum);
 
-                /*//Get users answer
-                Thread.sleep(1000);
-                submitBtn = (Button) findViewById(R.id.submitBtn);
-                ArrayList<Integer> userAnswer = new ArrayList<Integer>();
-                userAnswer = enterInput(userAnswer);
-
-                //Check answer and give feedback
-                openActivitySubmitBtn(userAnswer);
-*/
             }
-            //openActivitySubmitBtn();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
+        });
 
         pauseBtn = (Button) findViewById(R.id.pauseBtn);
         pauseBtn.setOnClickListener(new View.OnClickListener() {
@@ -91,59 +65,103 @@ public class EasyLevel extends AppCompatActivity {
                 openActivityPauseBtn();
             }
         });
+
+        submitBtn = (Button) findViewById(R.id.submitBtn);
+        submitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (count < numberList.size()){
+                    String value = userInput.getText().toString();
+                    int input = Integer.parseInt(value);
+                    userAns.add(input);
+                    count++;
+                    DisplayList.setText(input + "");
+                }
+                else {
+                    if (check()){
+                        count = 0;
+                        addToList();
+                        userAns.removeAll(userAns);
+                        DisplayList.setText("Click Me When Ready!");
+                        score++;
+                    }
+                    else{
+                        latestScore = score;
+                        if (latestScore > highScore){
+                            highScore = latestScore;
+                        }
+                        openActivitySubmitBtn();
+                    }
+                }
+
+            }
+
+        });
+    }
+    public void openActivityPauseBtn() {
+        latestScore = score;
+        if (latestScore > highScore){
+            highScore = latestScore;
+        }
+        Intent pausebtn = new Intent(this, MenuBtn.class);
+        pausebtn.putExtra("latestScore", latestScore);
+        pausebtn.putExtra("highScore", highScore);
+        pausebtn.putExtra("numGamesPlayed", numGamesPlayed);
+        pausebtn.putExtra("name", name);
+        startActivity(pausebtn);
+    }
+    public void openActivitySubmitBtn() {
+
+        Intent submitBtn = new Intent(this, endGame.class);
+        submitBtn.putExtra("latestScore", latestScore);
+        submitBtn.putExtra("highScore", highScore);
+        submitBtn.putExtra("numGamesPlayed", numGamesPlayed);
+        submitBtn.putExtra("name", name);
+        startActivity(submitBtn);
     }
 
-
-        private ArrayList<Integer> enterInput(ArrayList<Integer> userAnswer) {
-            for (int i = 0; i < game.getNumberList().size(); i++) {
-                DisplayInstructions.setText("Enter Number " + (i + 1));
-                submitBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        int num = Integer.parseInt(userInput.getText().toString());
-                        userAnswer.add(num);
-                    }
-                });
-            }
-            return userAnswer;
+    public void pause(int num){
+        try {
+            Thread.sleep(num * 1000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
+    }
 
+    public void DisplayList(int count) {
+        DisplayList = (TextView)findViewById(R.id.displayList);
+        DisplayList.setText(count + "");
+    }
 
-        public void openActivityPauseBtn() {
-            Intent pausebtn = new Intent(this, MenuBtn.class);
-            startActivity(pausebtn);
-        }
-        public void openActivitySubmitBtn(ArrayList<Integer> answer) {
-            if (game.checkAnswer(answer)){
-                game.resetGameBoard(1);
-            } else {
-                Intent submitBtn = new Intent(this, SubmitBtn.class);
-                startActivity(submitBtn);
+    public void addToList(){
+        int maximum = 5;
+        int minimum = 1;
+        int x = (int)(Math.random() * maximum) + minimum;
+
+        if (numberList.size() != 0 ){
+            while (x == numberList.get(numberList.size() - 1)){
+                x = (int)(Math.random() * maximum) + minimum;
             }
         }
+        numberList.add(x);
+    }
 
-        public void addToList(){
-            int maximum = 5;
-            int minimum = 1;
-            int x = (int)(Math.random() * maximum) + minimum;
-            numberList.add(x);
-            scrambledNumberList.add(x);
+    public void addToList(int num){
+        for (int i = 0; i < num; i++) {
+            addToList();
+        }
+    }
+
+    public boolean check(){
+        if (userAns.equals(numberList))
+        {
+            return true;}
+        else {
+            return false;
         }
 
-        public void addToList(int num){
-            for (int i = 0; i < num; i++) {
-                int maximum = 5;
-                int minimum = 1;
-                int x = (int)(Math.random() * maximum) + minimum;
-                numberList.add(x);
-                scrambledNumberList.add(x);
-            }
-        }
-
-        public void scramble (){
-            Collections.shuffle(scrambledNumberList);
-        }
-
-
+    }
 
     }
